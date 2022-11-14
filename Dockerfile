@@ -1,5 +1,5 @@
 FROM --platform=$BUILDPLATFORM python:3.9-alpine AS base
-RUN apk add --update --no-cache python3 && pip3 install mitmproxy google-cloud-pubsub protobuf
+RUN pip3 install mitmproxy google-cloud-pubsub protobuf
 
 LABEL org.opencontainers.image.source https://github.com/vivid-lapin/docker-mitmproxy
 EXPOSE 8080
