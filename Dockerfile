@@ -11,6 +11,7 @@ RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     libffi-dev \
     libssl-dev \
     gosu \
+    python3-grpcio python3-grpc-tools \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && export PATH="$HOME/.cargo/bin:$PATH" \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
