@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM python:3.9.15-slim-buster AS base
+FROM --platform=$TARGETPLATFORM python:3.9.15-slim-buster AS base
 RUN apt update \
     && apt full-upgrade -y \
     && apt install -y --no-install-recommends \
