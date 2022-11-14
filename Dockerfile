@@ -8,7 +8,7 @@ RUN apt update \
     && curl https://sh.rustup.rs -sSf | sh \
     && export PATH="/root/.cargo/bin:$PATH" \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
-    && rustup self uninstall \
+    && rustup self uninstall -y \
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists
