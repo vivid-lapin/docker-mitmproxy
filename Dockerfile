@@ -10,7 +10,6 @@ RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && export PATH="$HOME/.cargo/bin:$PATH" \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
-    && rustup self uninstall -y \
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists
