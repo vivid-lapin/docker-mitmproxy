@@ -1,16 +1,8 @@
 FROM --platform=$TARGETPLATFORM python:3.9.15-slim-buster AS base
 RUN apt update \
-    && apt full-upgrade -y \
-    && apt install -y --no-install-recommends \
-    tzdata \
-    cargo \
-    ca-certificates \
-    curl \
+    && curl https://sh.rustup.rs -sSf | sh \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
-    && apt purge cargo -y \
-    && apt autoremove -y \
-    && apt clean -y \
-    && rm -rf /var/lib/apt/lists
+    && rustup self uninstall
 
 LABEL org.opencontainers.image.source https://github.com/vivid-lapin/docker-mitmproxy
 EXPOSE 8080
