@@ -1,10 +1,22 @@
 # syntax = docker/dockerfile:experimental
 FROM --platform=$TARGETPLATFORM python:3.9.15-slim-buster AS base
 ENV DEBIAN_FRONTEND "noninteractive"
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gosu \
-    && pip3 install mitmproxy==8.1.1 google-cloud-pubsub protobuf \
-    && rm -rf /var/lib/apt/lists/*
+RUN --mount=type=tmpfs,target=/root/.cargo apt update \
+    && apt full-upgrade -y \
+    && apt install -y --no-install-recommends \
+    tzdata \
+    ca-certificates \
+    curl \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    gosu \
+    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    && export PATH="$HOME/.cargo/bin:$PATH" \
+    && pip3 install mitmproxy google-cloud-pubsub protobuf \
+    && apt autoremove -y \
+    && apt clean -y \
+    && rm -rf /var/lib/apt/lists
 
 LABEL org.opencontainers.image.source https://github.com/vivid-lapin/docker-mitmproxy
 EXPOSE 8080 8081
