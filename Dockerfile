@@ -1,12 +1,13 @@
 FROM --platform=$BUILDPLATFORM python:3.9.15-slim-buster AS base
+ENV DEBIAN_FRONTEND "noninteractive"
 RUN apt update \
     && apt full-upgrade -y \
     && apt install -y --no-install-recommends \
     tzdata \
     ca-certificates \
     curl \
-    && curl https://sh.rustup.rs -sSf | sh \
-    && export PATH="/root/.cargo/bin:$PATH" \
+    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    && export PATH="$HOME/.cargo/bin:$PATH" \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
     && rustup self uninstall -y \
     && apt autoremove -y \
