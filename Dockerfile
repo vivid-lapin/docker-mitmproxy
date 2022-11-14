@@ -7,6 +7,7 @@ RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     tzdata \
     ca-certificates \
     curl \
+    gcc \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && export PATH="$HOME/.cargo/bin:$PATH" \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
