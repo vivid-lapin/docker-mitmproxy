@@ -7,7 +7,7 @@ RUN apt update \
     ca-certificates \
     curl \
     && pip3 install mitmproxy google-cloud-pubsub protobuf \
-    && apt purge cargo \
+    && apt purge cargo -y \
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists
