@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM --platform=$TARGETPLATFORM python:3.9.15-slim-buster AS base
+FROM --platform=$TARGETPLATFORM python:3.9.15-slim-bullseye AS base
 ENV DEBIAN_FRONTEND "noninteractive"
 RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     && apt full-upgrade -y \
