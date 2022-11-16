@@ -14,7 +14,7 @@ RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     python3-grpcio python3-grpc-tools \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && export PATH="$HOME/.cargo/bin:$PATH" \
-    && pip3 install mitmproxy google-cloud-pubsub protobuf --no-binary=grpcio \
+    && pip3 install mitmproxy==8.1.1 google-cloud-pubsub protobuf --no-binary=grpcio \
     && apt purge -y build-essential gosu \
     && apt autoremove -y \
     && apt clean -y \
