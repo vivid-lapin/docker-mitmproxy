@@ -20,6 +20,8 @@ RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists $HOME/.rustup
 
+WORKDIR /app
+
 LABEL org.opencontainers.image.source https://github.com/vivid-lapin/docker-mitmproxy
 EXPOSE 8080 8081
 HEALTHCHECK --interval=5m --timeout=3s \
