@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM --platform=$TARGETPLATFORM python:3.9.15-slim-bullseye AS base
+FROM --platform=$TARGETPLATFORM python:3.12.7-slim-bookworm AS base
 ENV DEBIAN_FRONTEND "noninteractive"
 RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     && apt full-upgrade -y \
@@ -12,13 +12,11 @@ RUN --mount=type=tmpfs,target=/root/.cargo apt update \
     libssl-dev \
     gosu \
     python3-grpcio python3-grpc-tools \
-    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
-    && export PATH="$HOME/.cargo/bin:$PATH" \
-    && pip3 install mitmproxy google-cloud-pubsub protobuf --no-binary=grpcio \
+    && pip3 install mitmproxy==11.0.0 google-cloud-pubsub==2.26.1 protobuf==5.28.2 msgpack==1.1.0 \
     && apt purge -y build-essential gosu \
     && apt autoremove -y \
     && apt clean -y \
-    && rm -rf /var/lib/apt/lists $HOME/.rustup
+    && rm -rf /var/lib/apt/lists
 
 WORKDIR /app
 
